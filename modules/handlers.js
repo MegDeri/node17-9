@@ -45,8 +45,9 @@ exports.error = function(request, response) {
 };
 
 exports.colorCss = function(request, response) {
-    var readStream = fs.createReadStream('css/style.css', 'utf-8');
-    response.writeHead(200, {"Content-Type": "text/css; charset=utf-8"});
-    readStream.pipe(response);
-    response.end();
+    fs.readFile("css/style.css", function(error, file) {
+        response.writeHead(200, {"Content-Type": "text/css; charset=utf-8"});
+        response.write(file);
+        response.end();
+    });
 };
